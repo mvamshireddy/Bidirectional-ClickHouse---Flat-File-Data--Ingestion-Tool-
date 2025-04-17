@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Typography, Box } from '@mui/material';
 
 function StatusDisplay() {
   const [status, setStatus] = useState('');
@@ -8,10 +9,10 @@ function StatusDisplay() {
   };
 
   return (
-    <div>
-      <h2>Status</h2>
-      <p>{status}</p>
-    </div>
+    <Box padding={2} border={1} borderColor="grey.300" borderRadius={2}>
+      <Typography variant="h5">Status</Typography>
+      <Typography variant="body1">{status || 'No status available'}</Typography>
+    </Box>
   );
 }
 

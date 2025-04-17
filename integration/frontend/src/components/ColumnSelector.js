@@ -1,5 +1,13 @@
 import React, { useState } from 'react';
 import api from '../api';
+import {
+  Button,
+  Checkbox,
+  FormControlLabel,
+  Typography,
+  Container,
+  Grid,
+} from '@mui/material';
 
 function ColumnSelector() {
   const [selectedColumns, setSelectedColumns] = useState([]);
@@ -21,25 +29,31 @@ function ColumnSelector() {
   };
 
   return (
-    <div>
-      <h2>Select Columns</h2>
-      <button onClick={loadColumns}>Load Columns</button>
-      {Object.keys(columns).map((table) => (
-        <div key={table}>
-          <h3>{table}</h3>
-          {columns[table].map((column) => (
-            <label key={column}>
-              <input
-                type="checkbox"
-                value={column}
-                onChange={() => handleCheckboxChange(column)}
+    <Container maxWidth="md">
+      <Typography variant="h5" gutterBottom>Select Columns</Typography>
+      <Button variant="contained" color="primary" onClick={loadColumns}>
+        Load Columns
+      </Button>
+      <Grid container spacing={2} style={{ marginTop: '16px' }}>
+        {Object.keys(columns).map((table) => (
+          <Grid item xs={12} key={table}>
+            <Typography variant="h6">{table}</Typography>
+            {columns[table].map((column) => (
+              <FormControlLabel
+                key={column}
+                control={
+                  <Checkbox
+                    checked={selectedColumns.includes(column)}
+                    onChange={() => handleCheckboxChange(column)}
+                  />
+                }
+                label={column}
               />
-              {column}
-            </label>
-          ))}
-        </div>
-      ))}
-    </div>
+            ))}
+          </Grid>
+        ))}
+      </Grid>
+    </Container>
   );
 }
 
